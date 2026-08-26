@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
+     role="img" aria-label="DOMStudio fracture trace">
+  <rect x="10" y="10" width="236" height="236" rx="54"
+        fill="#0E1218" stroke="#2A3542" stroke-width="12"/>
+  <path d="M35 184 C62 174 72 124 101 127 C130 130 139 80 166 83 C194 86 204 49 225 42"
+        fill="none" stroke="#43D6B1" stroke-width="17"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M42 210 C78 194 103 205 129 184 C156 163 181 174 218 150"
+        fill="none" stroke="#69A7FF" stroke-width="7" stroke-linecap="round" opacity="0.72"/>
+  <circle cx="35" cy="184" r="12" fill="#EEF3F7" stroke="#43D6B1" stroke-width="6"/>
+  <circle cx="225" cy="42" r="12" fill="#EEF3F7" stroke="#F2B866" stroke-width="6"/>
+</svg>

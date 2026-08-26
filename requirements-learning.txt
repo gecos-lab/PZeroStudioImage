@@ -1,0 +1,4 @@
+-r requirements.txt
+torch>=2.2
+onnx>=1.16
+onnxruntime>=1.18

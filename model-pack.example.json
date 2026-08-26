@@ -1,0 +1,116 @@
+{
+  "version": 2,
+  "name": "GeoTraceNet example",
+  "model_version": "0.1.0",
+  "architecture": "GeoTraceNet",
+  "model": "geotrace.onnx",
+  "model_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "pack_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "license": "LicenseRef-REPLACE-ME",
+  "tile_size": 512,
+  "overlap": 64,
+  "contract": {
+    "input": {
+      "name": "image",
+      "layout": "NCHW",
+      "dtype": "float32",
+      "color_space": "RGB",
+      "shape": [1, 3, 512, 512]
+    },
+    "preprocessing": {
+      "method": "per_image_channel_percentile",
+      "lower_percentile": 1.0,
+      "upper_percentile": 99.0,
+      "invalid_fill": "normalized_valid_median"
+    },
+    "outputs": {
+      "probability": {
+        "name": "probability",
+        "dtype": "float32",
+        "layout": "NCHW",
+        "shape": [1, 1, 512, 512],
+        "activation": "sigmoid",
+        "semantics": "fracture_centreline_probability"
+      },
+      "orientation": {
+        "name": "orientation",
+        "dtype": "float32",
+        "layout": "NCHW",
+        "shape": [1, 2, 512, 512],
+        "activation": "l2_normalized",
+        "encoding": "axial_cos2_sin2"
+      },
+      "uncertainty": {
+        "name": "uncertainty",
+        "dtype": "float32",
+        "layout": "NCHW",
+        "shape": [1, 1, 512, 512],
+        "activation": "sigmoid",
+        "semantics": "learned_error_proxy_uncalibrated"
+      }
+    }
+  },
+  "provenance": {
+    "code_revision": "replace-with-source-commit",
+    "training_checkpoint_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "dataset_id": "replace-with-versioned-dataset-id",
+    "split_id": "replace-with-versioned-split-id",
+    "architecture_width": 32,
+    "parameter_count": 0,
+    "export": {
+      "opset": 18,
+      "exporter": "torch.onnx.export(dynamo=False)",
+      "torch_version": "replace-with-export-version",
+      "onnx_version": "replace-with-export-version",
+      "onnxruntime_version": "replace-with-validation-version",
+      "validation_provider": "CPUExecutionProvider",
+      "parity": {
+        "atol": 0.00001,
+        "rtol": 0.0001,
+        "random_seed": 1729,
+        "cases": [
+          {
+            "name": "zeros",
+            "passed": true,
+            "max_abs_error": {
+              "probability": 0.0,
+              "orientation": 0.0,
+              "uncertainty": 0.0
+            }
+          },
+          {
+            "name": "checkerboard",
+            "passed": true,
+            "max_abs_error": {
+              "probability": 0.0,
+              "orientation": 0.0,
+              "uncertainty": 0.0
+            }
+          },
+          {
+            "name": "gradient",
+            "passed": true,
+            "max_abs_error": {
+              "probability": 0.0,
+              "orientation": 0.0,
+              "uncertainty": 0.0
+            }
+          },
+          {
+            "name": "seeded_random",
+            "passed": true,
+            "max_abs_error": {
+              "probability": 0.0,
+              "orientation": 0.0,
+              "uncertainty": 0.0
+            }
+          }
+        ]
+      }
+    }
+  },
+  "limitations": [
+    "Validate performance on imagery, geology, resolution, and sensors outside the training domain.",
+    "The uncertainty head is an uncalibrated learned error proxy, not a calibrated probability of failure."
+  ]
+}
